@@ -5,9 +5,10 @@
   --ligth-blue: #91e5f6;
   --dark-blue: #201e50;
   --orange: #ffc700;
-  --fuchsia: #8fc7c7;
+  --fuchsia: #e75a7c;
   --bgc: #e5e5e5;
   --inter: "Inter", "sans-serif";
+  --border-radius: 8px;
 }
 
 * {
