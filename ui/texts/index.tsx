@@ -12,9 +12,12 @@ const Text = styled.p`
   font-size: 16px;
 `;
 
+//Large Text
 export const LargeT = styled(Text)`
   font-size: 24px;
 `;
+
+//Large Text Bold
 export const LargeTB = styled(Text)`
   font-size: 24px;
   font-weight: 700;
@@ -22,6 +25,7 @@ export const LargeTB = styled(Text)`
 
 export const Body = styled(Text)``;
 
+//Body Bold
 export const BodyB = styled(Text)`
   font-weight: 700;
 `;
