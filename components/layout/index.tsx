@@ -1,15 +1,18 @@
+import { ReactNode } from "react";
 import { Footer } from "components/footer";
 import { Header } from "components/header";
-import { ReactNode } from "react";
+import styles from "./layout.module.css";
 
-type LayOutProps = {
+type LayoutProps = {
   children: ReactNode;
 };
 
-export function LayOut({ children }: LayOutProps) {
-  <Header></Header>;
-  {
-    children;
-  }
-  <Footer></Footer>;
+export function Layout({ children }: LayoutProps) {
+  return (
+    <>
+      <Header></Header>
+      <main className={styles.container}>{children}</main>
+      <Footer></Footer>
+    </>
+  );
 }

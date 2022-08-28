@@ -1,6 +1,8 @@
+@import url(https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap);
+
 :root {
-  --font-Blk: #000;
-  --font-Wht: #f7ebeb;
+  --Blk: #000;
+  --Wht: #f7ebeb;
   --blue: #4f7cac;
   --ligth-blue: #91e5f6;
   --dark-blue: #201e50;
@@ -18,10 +20,12 @@
 
 body {
   margin: 0;
-  margin-block-end: 0;
-  margin-block-start: 0;
   padding: 0;
   font-family: var(--inter);
-  background-color: var(--bgc);
-  color: var(--font-colorBlk);
+  background-color: var(--blue);
+  color: var(--Blk);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }

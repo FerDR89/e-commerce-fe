@@ -44,17 +44,7 @@ class MyDocument extends Document {
     return (
       <Html>
         <Head>
-          <link rel="preconnect" href="https://fonts.googleapis.com" />
-          <link
-            rel="preconnect"
-            href="https://fonts.gstatic.com"
-            crossOrigin=""
-          />
-          <link
-            href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap"
-            rel="stylesheet"
-          />
-          <link rel="stylesheet" href="/base.css" />
+          <link rel="stylesheet" href="base.css" />
         </Head>
         <body>
           <Main />
