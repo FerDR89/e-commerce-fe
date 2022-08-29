@@ -22,6 +22,7 @@
 .nav__container {
   grid-row: 1 / 2;
 }
+
 .nav {
   display: grid;
   list-style: none;
@@ -29,11 +30,14 @@
   margin: 0;
   padding: 0;
 }
+
+.li {
+  background-color: aqua;
+  width: 0px;
+}
+
 .link {
   text-decoration: none;
-}
-.li {
-  color: "blue";
 }
 .social-media {
   grid-row: 2 / 3;
@@ -61,6 +65,5 @@
 
 .copyright {
   grid-row: 3 / 4;
-
   align-self: flex-end;
 }

@@ -1,3 +1,9 @@
+import { Nav } from "components/nav";
+
 export function Header() {
-  return <div>Soy el header</div>;
+  return (
+    <div>
+      <Nav />
+    </div>
+  );
 }

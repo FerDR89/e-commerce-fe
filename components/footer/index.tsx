@@ -6,6 +6,7 @@ import { InstagramIcon, TwitterIcon } from "ui/icons";
 
 const BodyWht = styled(Body)`
   color: var(--Wht);
+  width: 100px;
 `;
 const BodyWht20 = styled(BodyWht)`
   font-size: 20px;

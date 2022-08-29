@@ -1,15 +1,16 @@
 import { useState } from "react";
 import Link from "next/link";
 import styled from "styled-components";
+import styles from "./nav.module.css";
 import { MenuIcon } from "ui/icons";
 import { Subtitle, LargeT, Body } from "ui/texts";
 
-const SubtitleWht = styled(Body)`
+const SubtitleWht = styled(Subtitle)`
   color: var(--Wht);
 `;
 
 const LargeTFuchsia = styled(LargeT)`
-  color: var(--Wht);
+  color: var(--fuchsia);
   font-size: 20px;
 `;
 
@@ -25,46 +26,57 @@ const MenuIconLB = styled(MenuIcon)`
 `;
 
 export function Nav() {
+  const [showNav, setShowNav] = useState(false);
+
+  //Buscar del state el mail del usuario. Reemplazar por la llamada al estado
+  // const userEmail = "ferdr89dev@gmail.com";
+  const userEmail = "ferdr89dev@gmail.com";
+
+  const handleClick = () => {
+    showNav === false ? setShowNav(true) : setShowNav(false);
+  };
+
   return (
     <>
-      <div>
-        <MenuIconLB />
+      <div onClick={handleClick} className={styles.container__icon}>
+        <MenuIconLB className={styles.icon} />
       </div>
-      <nav>
-        <ul>
-          <li>
-            <Link href={"/signin"}>
-              <a>
-                <a /*className={styles.link}*/>
+      {showNav && (
+        <nav className={styles.container__nav}>
+          <ul className={styles.container__ul}>
+            <li className={styles.li}>
+              <Link href={"/signin"}>
+                <a className={styles.link}>
                   <SubtitleWht>Ingresar</SubtitleWht>
                 </a>
-              </a>
-            </Link>
-          </li>
-          <li>
-            <Link href={"/profile"}>
-              <a>
-                <a /*className={styles.link}*/>
-                  <SubtitleWht>Mi perfil</SubtitleWht>
+              </Link>
+            </li>
+            <li className={styles.li}>
+              <Link href={"/profile"}>
+                <a className={styles.link}>
+                  <SubtitleWht>Mi Perfil</SubtitleWht>
                 </a>
-              </a>
-            </Link>
-          </li>
-          <li>
-            <Link href={"/search"}>
-              <a>
-                <a /*className={styles.link}*/>
+              </Link>
+            </li>
+            <li className={styles.li}>
+              <Link href={"/search"}>
+                <a className={styles.link}>
                   <SubtitleWht>Buscar</SubtitleWht>
                 </a>
-              </a>
-            </Link>
-          </li>
-        </ul>
-      </nav>
-      <div>
-        <BodyWht></BodyWht>
-        <LargeTFuchsia>Cerrar sesión</LargeTFuchsia>
-      </div>
+              </Link>
+            </li>
+          </ul>
+        </nav>
+      )}
+      {userEmail && showNav && (
+        //Agregar acá la función que borre el estado y/o localStorage
+        <div>
+          <BodyWht>{userEmail}</BodyWht>
+          <LargeTFuchsia onClick={() => console.log("Click!")}>
+            Cerrar sesión
+          </LargeTFuchsia>
+        </div>
+      )}
     </>
   );
 }
