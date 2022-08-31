@@ -1,0 +1,22 @@
+.container {
+  width: 375px;
+  height: 84px;
+  padding: 20px;
+  background-color: var(--Blk);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+/* 
+@media (min-width: 376px) {
+  .container {
+    max-width: 1200px;
+    width: 100%;
+    height: 106px;
+    padding: 70px 0 45px 80px;
+    background-color: var(--Blk);
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+  }
+} */

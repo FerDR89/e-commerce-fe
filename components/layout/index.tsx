@@ -10,9 +10,9 @@ type LayoutProps = {
 export function Layout({ children }: LayoutProps) {
   return (
     <>
-      <Header></Header>
+      <Header />
       <main className={styles.container}>{children}</main>
-      <Footer></Footer>
+      <Footer />
     </>
   );
 }

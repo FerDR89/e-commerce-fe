@@ -1,3 +1,8 @@
+import {
+  ControllerRenderProps,
+  FieldValues,
+  useController,
+} from "react-hook-form";
 import styled from "styled-components";
 
 type InputCustomProps = {
@@ -6,9 +11,9 @@ type InputCustomProps = {
 
 const Input = styled.input`
   min-width: 248px;
-  width: ${(props) => props.width + "px"};
-  height: ${(props) => props.height + "px"};
   border-radius: var(--border-radius);
+  width: ${(props) => props.width};
+  height: ${(props) => props.height};
   border: 1px solid ${(props: InputCustomProps) => props.inputBorderColor};
 `;
 
@@ -18,11 +23,11 @@ const Label = styled.label`
 `;
 
 type FieldSetCustomProps = {
-  fieldSetWidth: number;
+  fieldSetWidth: string;
 };
 
 const FieldSet = styled.fieldset`
-  width: ${(props: FieldSetCustomProps) => props.fieldSetWidth + "px"};
+  width: ${(props: FieldSetCustomProps) => props.fieldSetWidth};
   min-width: 248px;
   display: flex;
   flex-direction: column;
@@ -32,36 +37,30 @@ const FieldSet = styled.fieldset`
   padding: 0;
 `;
 
+//TODO Resolver el type de las props
 type TextFieldProps = {
   labelText?: string;
-  type: string;
-  name: string;
-  placeholder: string;
-  width: number;
-  heightInput: number;
+  name?: string;
+  type?: string;
+  placeholder?: string;
+  width: string;
+  heightInput?: string;
   borderColor: string;
+  field: ControllerRenderProps<FieldValues, string>;
 };
 
-export const TextField = ({
-  labelText,
-  type,
-  name,
-  placeholder,
-  width,
-  heightInput,
-  borderColor,
-}: TextFieldProps) => {
+export const TextField = (props: any) => {
+  const { field } = useController(props);
   return (
-    <FieldSet fieldSetWidth={width}>
-      {labelText && <Label htmlFor={name}>{labelText}</Label>}
+    <FieldSet fieldSetWidth={props.width}>
+      {props.labelText && <Label htmlFor={props.name}>{props.labelText}</Label>}
       <Input
-        name={name}
-        type={type}
-        id={name}
-        placeholder={placeholder}
-        width={width}
-        height={heightInput}
-        inputBorderColor={borderColor}
+        width={props.width}
+        height={props.heightInput}
+        inputBorderColor={props.borderColor}
+        placeholder={props.placeholder}
+        type={props.type}
+        {...field}
       />
     </FieldSet>
   );

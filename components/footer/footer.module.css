@@ -32,7 +32,6 @@
 }
 
 .li {
-  background-color: aqua;
   width: 0px;
 }
 
@@ -61,6 +60,7 @@
 .instagram__container {
   display: flex;
   column-gap: 8px;
+  cursor: pointer;
 }
 
 .copyright {

@@ -1,9 +1,10 @@
 import { Layout } from "components/layout";
+import { Search } from "components/search";
 
 export function HomePage() {
   return (
     <Layout>
-      <p>Hola</p>
+      <Search />
     </Layout>
   );
 }

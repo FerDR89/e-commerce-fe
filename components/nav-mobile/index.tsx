@@ -1,7 +1,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import styled from "styled-components";
-import styles from "./nav.module.css";
+import styles from "./navMobile.module.css";
 import { MenuIcon } from "ui/icons";
 import { Subtitle, LargeT, Body } from "ui/texts";
 
@@ -25,11 +25,10 @@ const MenuIconLB = styled(MenuIcon)`
   cursor: pointer;
 `;
 
-export function Nav() {
+export function NavMobile() {
   const [showNav, setShowNav] = useState(false);
 
   //Buscar del state el mail del usuario. Reemplazar por la llamada al estado
-  // const userEmail = "ferdr89dev@gmail.com";
   const userEmail = "ferdr89dev@gmail.com";
 
   const handleClick = () => {
@@ -66,17 +65,18 @@ export function Nav() {
               </Link>
             </li>
           </ul>
+          {userEmail && showNav && (
+            <div className={styles.container__close}>
+              <BodyWht>{userEmail}</BodyWht>
+              <LargeTFuchsia onClick={() => console.log("Click!")}>
+                Cerrar sesión
+              </LargeTFuchsia>
+            </div>
+          )}
         </nav>
-      )}
-      {userEmail && showNav && (
-        //Agregar acá la función que borre el estado y/o localStorage
-        <div>
-          <BodyWht>{userEmail}</BodyWht>
-          <LargeTFuchsia onClick={() => console.log("Click!")}>
-            Cerrar sesión
-          </LargeTFuchsia>
-        </div>
       )}
     </>
   );
 }
+
+//Agregar acá la función que borre el estado y/o localStorage
