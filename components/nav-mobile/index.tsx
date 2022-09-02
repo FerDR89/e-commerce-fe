@@ -3,21 +3,12 @@ import Link from "next/link";
 import styled from "styled-components";
 import styles from "./navMobile.module.css";
 import { MenuIcon } from "ui/icons";
-import { Subtitle, LargeT, Body } from "ui/texts";
+import { Subtitle } from "ui/texts";
+import { CloseSesion } from "components/close-sesion";
 
 const SubtitleWht = styled(Subtitle)`
   color: var(--Wht);
 `;
-
-const LargeTFuchsia = styled(LargeT)`
-  color: var(--fuchsia);
-  font-size: 20px;
-`;
-
-const BodyWht = styled(Body)`
-  color: var(--Wht);
-`;
-
 const MenuIconLB = styled(MenuIcon)`
   width: 30px;
   height: 30px;
@@ -65,14 +56,7 @@ export function NavMobile() {
               </Link>
             </li>
           </ul>
-          {userEmail && showNav && (
-            <div className={styles.container__close}>
-              <BodyWht>{userEmail}</BodyWht>
-              <LargeTFuchsia onClick={() => console.log("Click!")}>
-                Cerrar sesión
-              </LargeTFuchsia>
-            </div>
-          )}
+          {userEmail && showNav && <CloseSesion email={userEmail} />}
         </nav>
       )}
     </>

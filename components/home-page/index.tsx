@@ -1,10 +1,8 @@
-import { Layout } from "components/layout";
-import { Search } from "components/search";
+import { LayOutWithOutSearch, MainLayout } from "components/layout";
+import { useWindowSize } from "lib/hooks";
 
 export function HomePage() {
-  return (
-    <Layout>
-      <Search />
-    </Layout>
-  );
+  const { width } = useWindowSize();
+
+  return <MainLayout>Hola</MainLayout>;
 }

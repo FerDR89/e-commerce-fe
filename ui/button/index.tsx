@@ -10,7 +10,7 @@ const Button = styled.button`
 
 export const ButtonBlue = styled(Button)`
   background-color: var(--blue);
-  color: var(--font-Wht);
+  color: var(--Wht);
 `;
 export const ButtonLightBlue = styled(Button)`
   background-color: var(--ligth-blue);
@@ -21,5 +21,7 @@ export const ButtonOrange = styled(Button)`
 `;
 export const ButtonFuchsia = styled(Button)`
   background-color: var(--fuchsia);
-  color: var(--font-Wht);
+  color: var(--Wht);
+  width: 172px;
+  height: 37px;
 `;

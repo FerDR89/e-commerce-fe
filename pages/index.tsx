@@ -1,5 +1,5 @@
 import { HomePage } from "components/home-page";
-import type { NextPage } from "next";
+import type { GetStaticProps, GetStaticPropsContext, NextPage } from "next";
 
 const Home: NextPage = () => {
   return (

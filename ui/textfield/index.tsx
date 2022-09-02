@@ -14,7 +14,7 @@ const Input = styled.input`
   border-radius: var(--border-radius);
   width: ${(props) => props.width};
   height: ${(props) => props.height};
-  border: 1px solid ${(props: InputCustomProps) => props.inputBorderColor};
+  border: 3px solid ${(props: InputCustomProps) => props.inputBorderColor};
 `;
 
 const Label = styled.label`
