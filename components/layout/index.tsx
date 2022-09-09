@@ -1,6 +1,10 @@
 import { ReactNode } from "react";
 import { Footer } from "components/footer";
-import { Header, HeaderWithOutSearchMobile } from "components/header";
+import {
+  Header,
+  HeaderWithOutSearchMobile,
+  HeaderWithOutSearch,
+} from "components/header";
 import styles from "./layout.module.css";
 
 type LayoutProps = {
@@ -17,12 +21,20 @@ export function MainLayout({ children }: LayoutProps) {
   );
 }
 
-//TODO HEADER DESK WITHOUT SEARCH
-
 export function LayOutWithOutSearchMobile({ children }: LayoutProps) {
   return (
     <>
       <HeaderWithOutSearchMobile />
+      <main className={styles.container}>{children}</main>
+      <Footer />
+    </>
+  );
+}
+
+export function LayOutWithOutSearch({ children }: LayoutProps) {
+  return (
+    <>
+      <HeaderWithOutSearch />
       <main className={styles.container}>{children}</main>
       <Footer />
     </>

@@ -44,7 +44,6 @@ export function Header() {
 export function HeaderWithOutSearchMobile() {
   const router = useRouter();
   const { width } = useWindowSize();
-
   return width < 376 ? (
     <>
       <div className={styles.container__nav}>
@@ -57,6 +56,32 @@ export function HeaderWithOutSearchMobile() {
       <div className={styles.container__nav}>
         <LogoIcon />
         <SearchDesktop />
+        {userEmail ? (
+          <CloseSesion email={userEmail} />
+        ) : (
+          <ButtonFuchsia onClick={() => router.push("signin")}>
+            Ingresar
+          </ButtonFuchsia>
+        )}
+      </div>
+    </>
+  );
+}
+
+export function HeaderWithOutSearch() {
+  const router = useRouter();
+  const { width } = useWindowSize();
+  return width < 376 ? (
+    <>
+      <div className={styles.container__nav}>
+        <LogoIcon />
+        <NavMobile />
+      </div>
+    </>
+  ) : (
+    <>
+      <div className={styles.container__nav}>
+        <LogoIcon />
         {userEmail ? (
           <CloseSesion email={userEmail} />
         ) : (

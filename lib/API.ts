@@ -38,7 +38,7 @@ const getToken = async (email: string, code: number) => {
 
   if (res.token) {
     localStorage.setItem("auth_token", res.token);
-    return true;
+    return res.token;
   } else {
     return false;
   }
