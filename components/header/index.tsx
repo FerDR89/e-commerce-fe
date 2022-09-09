@@ -5,15 +5,14 @@ import { LogoIcon } from "ui/icons";
 import { SearchDesktop, SearchMobile } from "components/search";
 import { ButtonFuchsia } from "ui/button";
 import { CloseSesion } from "components/close-sesion";
-import { useWindowSize } from "lib/hooks";
-
-//TODO HEADER WITH MOBILE || DESKTOP
-
-const userEmail = "";
+import { useUser, useWindowSize } from "lib/hooks";
 
 export function Header() {
   const router = useRouter();
+  const user = useUser();
+  const userEmail = user.email;
   const { width } = useWindowSize();
+
   return width < 376 ? (
     <>
       <div className={styles.container__nav}>
@@ -43,6 +42,8 @@ export function Header() {
 
 export function HeaderWithOutSearchMobile() {
   const router = useRouter();
+  const user = useUser();
+  const userEmail = user.email;
   const { width } = useWindowSize();
   return width < 376 ? (
     <>
@@ -70,6 +71,8 @@ export function HeaderWithOutSearchMobile() {
 
 export function HeaderWithOutSearch() {
   const router = useRouter();
+  const user = useUser();
+  const userEmail = user.email;
   const { width } = useWindowSize();
   return width < 376 ? (
     <>

@@ -7,3 +7,14 @@
   justify-content: center;
   row-gap: 14px;
 }
+
+.text__container {
+  padding-left: 20px;
+}
+
+@media (min-width: 376px) {
+  .text__container {
+    padding-left: 0;
+    margin-bottom: 22px;
+  }
+}

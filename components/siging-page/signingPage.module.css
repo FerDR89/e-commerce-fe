@@ -1,0 +1,19 @@
+.container {
+  width: 375px;
+  height: 275px;
+  display: grid;
+  grid-template-rows: 75px 200px;
+  align-items: center;
+  background-color: var(--bgc);
+}
+
+@media (min-width: 376px) {
+  .container {
+    width: 100%;
+    height: 454px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+}

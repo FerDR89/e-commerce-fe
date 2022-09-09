@@ -22,7 +22,7 @@ body {
   margin: 0;
   padding: 0;
   font-family: var(--inter);
-  background-color: var(--blue);
+  background-color: #000410;
   color: var(--Blk);
   display: flex;
   flex-direction: column;

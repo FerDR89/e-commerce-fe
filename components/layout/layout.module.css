@@ -1,9 +1,11 @@
 .container {
   width: 375px;
+  min-height: calc(100vh - 84px - 648px);
 }
 
 @media (min-width: 376px) {
   .container {
     width: 1200px;
+    min-height: calc(100vh - 106px - 408px);
   }
 }

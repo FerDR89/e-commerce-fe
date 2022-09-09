@@ -4,6 +4,7 @@ const Button = styled.button`
   border-radius: var(--border-radius);
   min-height: 37px;
   min-width: 148px;
+  font-weight: 700;
   border: transparent;
   cursor: pointer;
 `;

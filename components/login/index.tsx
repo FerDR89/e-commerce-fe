@@ -50,13 +50,16 @@ export function Login() {
   };
 
   return !user.email ? (
-    <section>
-      <Subtitle>Ingresar</Subtitle>
+    <>
+      <div className={style.text__container}>
+        <Subtitle>Ingresar</Subtitle>
+      </div>
       <form className={style.login__form} onSubmit={handleSubmit(handleEmail)}>
         <TextField
           type="text"
           name="email"
           placeholder="Ingresá tu email"
+          labelText="Email"
           width={"333px"}
           heightInput={"46px"}
           control={control}
@@ -64,10 +67,12 @@ export function Login() {
         />
         <ButtonOrangeLarge>Continuar</ButtonOrangeLarge>
       </form>
-    </section>
+    </>
   ) : (
-    <section>
-      <Subtitle>Código</Subtitle>
+    <>
+      <div className={style.text__container}>
+        <Subtitle>Código</Subtitle>
+      </div>
       <form className={style.login__form} onSubmit={handleSubmit(handleCode)}>
         <TextField
           type="text"
@@ -81,6 +86,6 @@ export function Login() {
         <Body>Te envíamos un código a tu email</Body>
         <ButtonOrangeLarge>Ingresar</ButtonOrangeLarge>
       </form>
-    </section>
+    </>
   );
 }

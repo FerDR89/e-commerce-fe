@@ -5,6 +5,7 @@ import styles from "./navMobile.module.css";
 import { MenuIcon } from "ui/icons";
 import { Subtitle } from "ui/texts";
 import { CloseSesion } from "components/close-sesion";
+import { useUser } from "lib/hooks";
 
 const SubtitleWht = styled(Subtitle)`
   color: var(--Wht);
@@ -18,9 +19,8 @@ const MenuIconLB = styled(MenuIcon)`
 
 export function NavMobile() {
   const [showNav, setShowNav] = useState(false);
-
-  //Buscar del state el mail del usuario. Reemplazar por la llamada al estado
-  const userEmail = "ferdr89dev@gmail.com";
+  const user = useUser();
+  const userEmail = user.email;
 
   const handleClick = () => {
     showNav === false ? setShowNav(true) : setShowNav(false);
@@ -34,21 +34,21 @@ export function NavMobile() {
       {showNav && (
         <nav className={styles.container__nav}>
           <ul className={styles.container__ul}>
-            <li className={styles.li}>
+            <li className={styles.li} onClick={handleClick}>
               <Link href={"/signin"}>
                 <a className={styles.link}>
                   <SubtitleWht>Ingresar</SubtitleWht>
                 </a>
               </Link>
             </li>
-            <li className={styles.li}>
+            <li className={styles.li} onClick={handleClick}>
               <Link href={"/profile"}>
                 <a className={styles.link}>
                   <SubtitleWht>Mi Perfil</SubtitleWht>
                 </a>
               </Link>
             </li>
-            <li className={styles.li}>
+            <li className={styles.li} onClick={handleClick}>
               <Link href={"/search"}>
                 <a className={styles.link}>
                   <SubtitleWht>Buscar</SubtitleWht>
@@ -62,5 +62,3 @@ export function NavMobile() {
     </>
   );
 }
-
-//Agregar acá la función que borre el estado y/o localStorage
