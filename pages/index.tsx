@@ -1,12 +1,8 @@
 import { HomePage } from "components/home-page";
-import type { GetStaticProps, GetStaticPropsContext, NextPage } from "next";
+import type { NextPage } from "next";
 
 const Home: NextPage = () => {
-  return (
-    <>
-      <HomePage />{" "}
-    </>
-  );
+  return <HomePage />;
 };
 
 export default Home;

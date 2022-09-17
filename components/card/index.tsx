@@ -3,10 +3,10 @@ import { LargeT, Subtitle } from "ui/texts";
 import styles from "./card.module.css";
 
 type CardProps = {
-  img?: string;
-  title?: string;
-  price?: string;
-  productId?: string;
+  img: string;
+  title: string;
+  price: string;
+  productId: string;
 };
 
 export function Card({ img, title, price, productId }: CardProps) {

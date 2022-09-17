@@ -9,9 +9,6 @@ import {
 import { ServerStyleSheet } from "styled-components";
 import Document from "next/document";
 
-// Esta page envuelve TODA la App y se ejecuta SOLO del lado del servidor.
-// Acá podemos incluir el base.css para poder utilizar la técnica de "Critical Css" (estos archivos deben estar en public)
-
 class MyDocument extends Document {
   static async getInitialProps(
     ctx: DocumentContext

@@ -44,7 +44,6 @@ export function Login() {
       if (result === false) {
         alert("Unauthorized token");
       }
-      setUser({ ...user, token: result });
       router.push("search");
     }
   };

@@ -1,12 +1,10 @@
-import { LayOutWithOutSearch, MainLayout } from "components/layout";
+import { FeaturedProducts } from "components/featured-products";
+import { LayOutWithOutSearch } from "components/layout";
 import { SearchHome } from "components/search";
-import { useWindowSize } from "lib/hooks";
 import { Title } from "ui/texts";
 import style from "./homePage.module.css";
 
 export function HomePage() {
-  const { width } = useWindowSize();
-
   return (
     <LayOutWithOutSearch>
       <section className={style.welcome__container}>
@@ -16,6 +14,7 @@ export function HomePage() {
         </div>
         <SearchHome />
       </section>
+      <FeaturedProducts />
     </LayOutWithOutSearch>
   );
 }
