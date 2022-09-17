@@ -1,0 +1,13 @@
+.welcome__container {
+  background-color: var(--bgc);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: calc(100vh - 84px);
+}
+.title__container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}

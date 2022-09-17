@@ -15,10 +15,13 @@ const Input = styled.input`
   width: ${(props) => props.width};
   height: ${(props) => props.height};
   border: 3px solid ${(props: InputCustomProps) => props.inputBorderColor};
+  ::placeholder {
+    padding-left: 5px;
+  }
 `;
 
 const Label = styled.label`
-  font-size: 16px;
+  font-size: 12px;
   margin-bottom: 8px;
 `;
 

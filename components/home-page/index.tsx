@@ -1,8 +1,21 @@
 import { LayOutWithOutSearch, MainLayout } from "components/layout";
+import { SearchHome } from "components/search";
 import { useWindowSize } from "lib/hooks";
+import { Title } from "ui/texts";
+import style from "./homePage.module.css";
 
 export function HomePage() {
   const { width } = useWindowSize();
 
-  return <MainLayout>Hola</MainLayout>;
+  return (
+    <LayOutWithOutSearch>
+      <section className={style.welcome__container}>
+        <div className={style.title__container}>
+          <Title>El mejor</Title>
+          <Title>e-commerce</Title>
+        </div>
+        <SearchHome />
+      </section>
+    </LayOutWithOutSearch>
+  );
 }

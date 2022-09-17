@@ -1,0 +1,16 @@
+.container {
+  width: 375px;
+  height: 450px;
+  display: grid;
+  grid-template-rows: 75px 350px;
+  align-items: center;
+  background-color: var(--bgc);
+}
+
+@media (min-width: 376px) {
+  .container {
+    width: 100%;
+    grid-template-rows: 0.5fr 2.5fr;
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+}
