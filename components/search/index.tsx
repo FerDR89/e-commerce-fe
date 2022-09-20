@@ -90,7 +90,7 @@ export function SearchHome() {
     mode: "onSubmit",
   });
 
-  const onSubmit = (data: FormInput) => console.log(data);
+  const onSubmit = (data: FormInput) => console.log({ data });
 
   return (
     <form className={style.form__mobile} onSubmit={handleSubmit(onSubmit)}>

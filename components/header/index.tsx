@@ -12,11 +12,16 @@ export function Header() {
   const user = useUser();
   const userEmail = user.email;
   const { width } = useWindowSize();
+  const returnClickIcon = () => {
+    router.push("/");
+  };
 
   return width < 376 ? (
     <>
       <div className={styles.container__nav}>
-        <LogoIcon />
+        <div onClick={returnClickIcon}>
+          <LogoIcon />
+        </div>
         <NavMobile />
       </div>
       <div style={{ backgroundColor: "var(--Blk)" }}>
@@ -26,7 +31,9 @@ export function Header() {
   ) : (
     <>
       <div className={styles.container__nav}>
-        <LogoIcon />
+        <div onClick={returnClickIcon}>
+          <LogoIcon />
+        </div>
         <SearchDesktop />
         {userEmail ? (
           <CloseSesion email={userEmail} />
@@ -45,17 +52,24 @@ export function HeaderWithOutSearchMobile() {
   const user = useUser();
   const userEmail = user.email;
   const { width } = useWindowSize();
+  const returnClickIcon = () => {
+    router.push("/");
+  };
   return width < 376 ? (
     <>
       <div className={styles.container__nav}>
-        <LogoIcon />
+        <div onClick={returnClickIcon}>
+          <LogoIcon />
+        </div>
         <NavMobile />
       </div>
     </>
   ) : (
     <>
       <div className={styles.container__nav}>
-        <LogoIcon />
+        <div onClick={returnClickIcon}>
+          <LogoIcon />
+        </div>
         <SearchDesktop />
         {userEmail ? (
           <CloseSesion email={userEmail} />
@@ -74,17 +88,24 @@ export function HeaderWithOutSearch() {
   const user = useUser();
   const userEmail = user.email;
   const { width } = useWindowSize();
+  const returnClickIcon = () => {
+    router.push("/");
+  };
   return width < 376 ? (
     <>
       <div className={styles.container__nav}>
-        <LogoIcon />
+        <div onClick={returnClickIcon}>
+          <LogoIcon />
+        </div>
         <NavMobile />
       </div>
     </>
   ) : (
     <>
       <div className={styles.container__nav}>
-        <LogoIcon />
+        <div onClick={returnClickIcon}>
+          <LogoIcon />
+        </div>
         {userEmail ? (
           <CloseSesion email={userEmail} />
         ) : (

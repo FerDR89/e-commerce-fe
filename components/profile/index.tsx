@@ -1,4 +1,4 @@
-import { useSetUser } from "lib/hooks";
+import { useSetUser, useWindowSize } from "lib/hooks";
 import { useRouter } from "next/router";
 import { useForm } from "react-hook-form";
 import styled from "styled-components";
@@ -16,8 +16,8 @@ const ButtonOrangeXL = styled(ButtonOrangeL)`
 `;
 
 export function Profile() {
-  const router = useRouter();
-  const [user, setUser] = useSetUser();
+  const { width } = useWindowSize();
+  const inputWidth = width < 376 ? 333 : 457;
 
   const { handleSubmit, control, reset } = useForm({
     defaultValues: {},
@@ -25,6 +25,7 @@ export function Profile() {
   });
 
   const handleForm = () => {};
+
   return (
     <>
       <div className={style.text__container}>
@@ -37,7 +38,7 @@ export function Profile() {
           name="name"
           placeholder="Ingresá tu nombre"
           labelText="Nombre completo"
-          width={"333px"}
+          width={inputWidth + "px"}
           heightInput={"46px"}
           control={control}
           rules={{ required: true }}
@@ -47,7 +48,7 @@ export function Profile() {
           name="address"
           placeholder="Ingresá tu dirección"
           labelText="Dirección"
-          width={"333px"}
+          width={inputWidth + "px"}
           heightInput={"46px"}
           control={control}
           rules={{ required: true }}
@@ -57,12 +58,16 @@ export function Profile() {
           name="tel"
           placeholder="Ingresá tu teléfono"
           labelText="Teléfono"
-          width={"333px"}
+          width={inputWidth + "px"}
           heightInput={"46px"}
           control={control}
           rules={{ required: true }}
         />
-        <ButtonOrangeL>Guardar</ButtonOrangeL>
+        {width < 376 ? (
+          <ButtonOrangeL>Guardar</ButtonOrangeL>
+        ) : (
+          <ButtonOrangeXL>Guardar</ButtonOrangeXL>
+        )}
       </form>
     </>
   );

@@ -43,8 +43,9 @@ export function Login() {
       const result = await getToken(user.email, code);
       if (result === false) {
         alert("Unauthorized token");
+      } else {
+        router.push("/");
       }
-      router.push("search");
     }
   };
 

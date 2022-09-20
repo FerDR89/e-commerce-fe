@@ -14,7 +14,9 @@ export function HomePage() {
         </div>
         <SearchHome />
       </section>
-      <FeaturedProducts />
+      <section className={style.featured_products__container}>
+        <FeaturedProducts />
+      </section>
     </LayOutWithOutSearch>
   );
 }

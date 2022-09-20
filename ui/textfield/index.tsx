@@ -12,12 +12,10 @@ type InputCustomProps = {
 const Input = styled.input`
   min-width: 248px;
   border-radius: var(--border-radius);
+  padding-left: 10px;
   width: ${(props) => props.width};
   height: ${(props) => props.height};
   border: 3px solid ${(props: InputCustomProps) => props.inputBorderColor};
-  ::placeholder {
-    padding-left: 5px;
-  }
 `;
 
 const Label = styled.label`
