@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { useRouter } from "next/router";
 import { useForm } from "react-hook-form";
 import styled from "styled-components";
@@ -6,7 +7,6 @@ import { ButtonOrange } from "ui/button";
 import { TextField } from "ui/textfield";
 import { Subtitle, Body } from "ui/texts";
 import style from "./login.module.css";
-import { useSetUser } from "lib/hooks";
 
 const ButtonOrangeLarge = styled(ButtonOrange)`
   width: 333px;
@@ -20,7 +20,7 @@ interface FormInput {
 
 export function Login() {
   const router = useRouter();
-  const [user, setUser] = useSetUser();
+  const [userEmail, setUserEmail] = useState("");
 
   const { handleSubmit, control, reset } = useForm({
     defaultValues: { email: "" },
@@ -32,15 +32,15 @@ export function Login() {
     if (email) {
       const cleanEmail: string = email.toLowerCase().trim();
       const result = await sendCode(cleanEmail);
-      result === true && setUser({ ...user, email: cleanEmail });
+      result === true && setUserEmail(cleanEmail);
       reset({ email: "" });
     }
   };
 
   const handleCode = async (data: FormInput) => {
     const code = data.code;
-    if (user.email && code) {
-      const result = await getToken(user.email, code);
+    if (userEmail && code) {
+      const result = await getToken(userEmail, code);
       if (result === false) {
         alert("Unauthorized token");
       } else {
@@ -49,7 +49,7 @@ export function Login() {
     }
   };
 
-  return !user.email ? (
+  return !userEmail ? (
     <>
       <div className={style.text__container}>
         <Subtitle>Ingresar</Subtitle>

@@ -1,11 +1,10 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import styled from "styled-components";
 import styles from "./navMobile.module.css";
 import { MenuIcon } from "ui/icons";
 import { Subtitle } from "ui/texts";
 import { CloseSesion } from "components/close-sesion";
-import { useUser } from "lib/hooks";
 
 const SubtitleWht = styled(Subtitle)`
   color: var(--Wht);
@@ -19,8 +18,17 @@ const MenuIconLB = styled(MenuIcon)`
 
 export function NavMobile() {
   const [showNav, setShowNav] = useState(false);
-  const user = useUser();
-  const userEmail = user.email;
+  const [userEmail, setUserEmail] = useState("");
+  const [tokenStatus, setTokenStatus] = useState(false);
+
+  useEffect(() => {
+    const token = localStorage.getItem("auth_token");
+    const email = localStorage.getItem("user_email");
+    if (token && email) {
+      setTokenStatus(true);
+      setUserEmail(email);
+    }
+  }, []);
 
   const handleClick = () => {
     showNav === false ? setShowNav(true) : setShowNav(false);
@@ -56,7 +64,9 @@ export function NavMobile() {
               </Link>
             </li>
           </ul>
-          {userEmail && showNav && <CloseSesion email={userEmail} />}
+          {userEmail && tokenStatus && showNav && (
+            <CloseSesion email={userEmail} />
+          )}
         </nav>
       )}
     </>

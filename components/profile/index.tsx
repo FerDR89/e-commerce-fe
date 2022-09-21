@@ -1,4 +1,5 @@
-import { useSetUser, useWindowSize } from "lib/hooks";
+import { updateMe, UserUpdateProps } from "lib/API";
+import { useWindowSize } from "lib/hooks";
 import { useRouter } from "next/router";
 import { useForm } from "react-hook-form";
 import styled from "styled-components";
@@ -17,6 +18,7 @@ const ButtonOrangeXL = styled(ButtonOrangeL)`
 
 export function Profile() {
   const { width } = useWindowSize();
+
   const inputWidth = width < 376 ? 333 : 457;
 
   const { handleSubmit, control, reset } = useForm({
@@ -24,7 +26,9 @@ export function Profile() {
     mode: "onSubmit",
   });
 
-  const handleForm = () => {};
+  const handleForm = async (data: UserUpdateProps) => {
+    const response = await updateMe(data);
+  };
 
   return (
     <>
@@ -35,7 +39,7 @@ export function Profile() {
       <form className={style.profile__form} onSubmit={handleSubmit(handleForm)}>
         <TextField
           type="text"
-          name="name"
+          name="fullname"
           placeholder="Ingresá tu nombre"
           labelText="Nombre completo"
           width={inputWidth + "px"}
@@ -55,7 +59,7 @@ export function Profile() {
         />
         <TextField
           type="number"
-          name="tel"
+          name="phone_number"
           placeholder="Ingresá tu teléfono"
           labelText="Teléfono"
           width={inputWidth + "px"}

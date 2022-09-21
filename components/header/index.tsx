@@ -5,12 +5,14 @@ import { LogoIcon } from "ui/icons";
 import { SearchDesktop, SearchMobile } from "components/search";
 import { ButtonFuchsia } from "ui/button";
 import { CloseSesion } from "components/close-sesion";
-import { useUser, useWindowSize } from "lib/hooks";
+import { useWindowSize } from "lib/hooks";
 
 export function Header() {
   const router = useRouter();
-  const user = useUser();
-  const userEmail = user.email;
+  // const userEmail = localStorage.getItem("user_email");
+  // const token = localStorage.getItem("auth_token");
+  const userEmail = "lalala";
+  const token = true;
   const { width } = useWindowSize();
   const returnClickIcon = () => {
     router.push("/");
@@ -35,7 +37,7 @@ export function Header() {
           <LogoIcon />
         </div>
         <SearchDesktop />
-        {userEmail ? (
+        {userEmail && token ? (
           <CloseSesion email={userEmail} />
         ) : (
           <ButtonFuchsia onClick={() => router.push("signin")}>
@@ -49,8 +51,10 @@ export function Header() {
 
 export function HeaderWithOutSearchMobile() {
   const router = useRouter();
-  const user = useUser();
-  const userEmail = user.email;
+  // const userEmail = localStorage.getItem("user_email");
+  // const token = localStorage.getItem("auth_token");
+  const userEmail = "lalala";
+  const token = true;
   const { width } = useWindowSize();
   const returnClickIcon = () => {
     router.push("/");
@@ -71,7 +75,7 @@ export function HeaderWithOutSearchMobile() {
           <LogoIcon />
         </div>
         <SearchDesktop />
-        {userEmail ? (
+        {userEmail && token ? (
           <CloseSesion email={userEmail} />
         ) : (
           <ButtonFuchsia onClick={() => router.push("signin")}>
@@ -85,8 +89,10 @@ export function HeaderWithOutSearchMobile() {
 
 export function HeaderWithOutSearch() {
   const router = useRouter();
-  const user = useUser();
-  const userEmail = user.email;
+  // const userEmail = localStorage.getItem("user_email");
+  // const token = localStorage.getItem("auth_token");
+  const userEmail = "lalala";
+  const token = true;
   const { width } = useWindowSize();
   const returnClickIcon = () => {
     router.push("/");
@@ -106,7 +112,7 @@ export function HeaderWithOutSearch() {
         <div onClick={returnClickIcon}>
           <LogoIcon />
         </div>
-        {userEmail ? (
+        {userEmail && token ? (
           <CloseSesion email={userEmail} />
         ) : (
           <ButtonFuchsia onClick={() => router.push("signin")}>

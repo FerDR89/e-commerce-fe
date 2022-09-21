@@ -1,4 +1,5 @@
-const API_BASE_URL = "https://e-commerce-be.vercel.app/api";
+// const API_BASE_URL = "https://e-commerce-be.vercel.app/api";
+const API_BASE_URL = "http://localhost:3000/api";
 
 export default async function fetchAPI(
   input: RequestInfo,
@@ -38,10 +39,32 @@ const getToken = async (email: string, code: number) => {
 
   if (res.token) {
     localStorage.setItem("auth_token", res.token);
+    localStorage.setItem("user_email", email);
     return true;
   } else {
     return false;
   }
 };
 
-export { sendCode, getToken };
+export type UserUpdateProps = {
+  fullname?: string;
+  phoneNumber?: string;
+  address?: string;
+  province?: string;
+  city?: string;
+};
+
+const updateMe = async (data: UserUpdateProps) => {
+  const res = await fetchAPI("/me", {
+    method: "PATCH",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(data),
+  });
+  if (res.updated === true) {
+    return true;
+  } else {
+    return false;
+  }
+};
+
+export { sendCode, getToken, updateMe };
