@@ -12,10 +12,7 @@ type CardProps = {
 export function Card({ img, title, price, productId }: CardProps) {
   const router = useRouter();
   const handleClick = () => {
-    //Llamo a la API y le pido la data de este productId y lo guardo en un estado
-    //O lo paso como query en la ruta de la siguiente page
-    //https://nextjs.org/docs/api-reference/next/link#with-url-object
-    //https://nextjs.org/docs/api-reference/next/router#router-object
+    router.push(`/item/${productId}`);
   };
   return (
     <section onClick={handleClick} className={styles.container}>

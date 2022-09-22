@@ -6,14 +6,20 @@ import { SearchDesktop, SearchMobile } from "components/search";
 import { ButtonFuchsia } from "ui/button";
 import { CloseSesion } from "components/close-sesion";
 import { useWindowSize } from "lib/hooks";
+import { useEffect, useState } from "react";
 
 export function Header() {
   const router = useRouter();
-  // const userEmail = localStorage.getItem("user_email");
-  // const token = localStorage.getItem("auth_token");
-  const userEmail = "lalala";
-  const token = true;
   const { width } = useWindowSize();
+  const [userEmail, setUserEmail] = useState("");
+
+  useEffect(() => {
+    const email = localStorage.getItem("user_email");
+    if (email) {
+      setUserEmail(email);
+    }
+  }, []);
+
   const returnClickIcon = () => {
     router.push("/");
   };
@@ -21,7 +27,7 @@ export function Header() {
   return width < 376 ? (
     <>
       <div className={styles.container__nav}>
-        <div onClick={returnClickIcon}>
+        <div style={{ cursor: "pointer" }} onClick={returnClickIcon}>
           <LogoIcon />
         </div>
         <NavMobile />
@@ -33,11 +39,11 @@ export function Header() {
   ) : (
     <>
       <div className={styles.container__nav}>
-        <div onClick={returnClickIcon}>
+        <div style={{ cursor: "pointer" }} onClick={returnClickIcon}>
           <LogoIcon />
         </div>
         <SearchDesktop />
-        {userEmail && token ? (
+        {userEmail ? (
           <CloseSesion email={userEmail} />
         ) : (
           <ButtonFuchsia onClick={() => router.push("signin")}>
@@ -51,18 +57,23 @@ export function Header() {
 
 export function HeaderWithOutSearchMobile() {
   const router = useRouter();
-  // const userEmail = localStorage.getItem("user_email");
-  // const token = localStorage.getItem("auth_token");
-  const userEmail = "lalala";
-  const token = true;
   const { width } = useWindowSize();
+  const [userEmail, setUserEmail] = useState("");
+
+  useEffect(() => {
+    const email = localStorage.getItem("user_email");
+    if (email) {
+      setUserEmail(email);
+    }
+  }, []);
+
   const returnClickIcon = () => {
     router.push("/");
   };
   return width < 376 ? (
     <>
       <div className={styles.container__nav}>
-        <div onClick={returnClickIcon}>
+        <div style={{ cursor: "pointer" }} onClick={returnClickIcon}>
           <LogoIcon />
         </div>
         <NavMobile />
@@ -71,11 +82,11 @@ export function HeaderWithOutSearchMobile() {
   ) : (
     <>
       <div className={styles.container__nav}>
-        <div onClick={returnClickIcon}>
+        <div style={{ cursor: "pointer" }} onClick={returnClickIcon}>
           <LogoIcon />
         </div>
         <SearchDesktop />
-        {userEmail && token ? (
+        {userEmail ? (
           <CloseSesion email={userEmail} />
         ) : (
           <ButtonFuchsia onClick={() => router.push("signin")}>
@@ -89,18 +100,23 @@ export function HeaderWithOutSearchMobile() {
 
 export function HeaderWithOutSearch() {
   const router = useRouter();
-  // const userEmail = localStorage.getItem("user_email");
-  // const token = localStorage.getItem("auth_token");
-  const userEmail = "lalala";
-  const token = true;
   const { width } = useWindowSize();
+  const [userEmail, setUserEmail] = useState("");
+
+  useEffect(() => {
+    const email = localStorage.getItem("user_email");
+    if (email) {
+      setUserEmail(email);
+    }
+  }, []);
+
   const returnClickIcon = () => {
     router.push("/");
   };
   return width < 376 ? (
     <>
       <div className={styles.container__nav}>
-        <div onClick={returnClickIcon}>
+        <div style={{ cursor: "pointer" }} onClick={returnClickIcon}>
           <LogoIcon />
         </div>
         <NavMobile />
@@ -109,10 +125,10 @@ export function HeaderWithOutSearch() {
   ) : (
     <>
       <div className={styles.container__nav}>
-        <div onClick={returnClickIcon}>
+        <div style={{ cursor: "pointer" }} onClick={returnClickIcon}>
           <LogoIcon />
         </div>
-        {userEmail && token ? (
+        {userEmail ? (
           <CloseSesion email={userEmail} />
         ) : (
           <ButtonFuchsia onClick={() => router.push("signin")}>

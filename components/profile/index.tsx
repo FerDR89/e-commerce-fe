@@ -1,8 +1,8 @@
-import { updateMe, UserUpdateProps } from "lib/API";
-import { useWindowSize } from "lib/hooks";
-import { useRouter } from "next/router";
 import { useForm } from "react-hook-form";
 import styled from "styled-components";
+import swal from "sweetalert";
+import { updateMe, UserUpdateProps } from "lib/API";
+import { useWindowSize } from "lib/hooks";
 import { ButtonOrange } from "ui/button";
 import { TextField } from "ui/textfield";
 import { Subtitle } from "ui/texts";
@@ -28,6 +28,12 @@ export function Profile() {
 
   const handleForm = async (data: UserUpdateProps) => {
     const response = await updateMe(data);
+    if (response === true) {
+      swal("Sus datos han sido actualizados correctamente");
+      reset({ fullname: "", address: "", phone_number: "" });
+    } else {
+      swal("Tuvimos un inconveniente, por favor vuelva a intentarlo");
+    }
   };
 
   return (
@@ -45,7 +51,7 @@ export function Profile() {
           width={inputWidth + "px"}
           heightInput={"46px"}
           control={control}
-          rules={{ required: true }}
+          rules={{ required: false }}
         />
         <TextField
           type="text"
@@ -55,7 +61,7 @@ export function Profile() {
           width={inputWidth + "px"}
           heightInput={"46px"}
           control={control}
-          rules={{ required: true }}
+          rules={{ required: false }}
         />
         <TextField
           type="number"
@@ -65,7 +71,7 @@ export function Profile() {
           width={inputWidth + "px"}
           heightInput={"46px"}
           control={control}
-          rules={{ required: true }}
+          rules={{ required: false }}
         />
         {width < 376 ? (
           <ButtonOrangeL>Guardar</ButtonOrangeL>

@@ -19,13 +19,10 @@ const MenuIconLB = styled(MenuIcon)`
 export function NavMobile() {
   const [showNav, setShowNav] = useState(false);
   const [userEmail, setUserEmail] = useState("");
-  const [tokenStatus, setTokenStatus] = useState(false);
 
   useEffect(() => {
-    const token = localStorage.getItem("auth_token");
     const email = localStorage.getItem("user_email");
-    if (token && email) {
-      setTokenStatus(true);
+    if (email) {
       setUserEmail(email);
     }
   }, []);
@@ -64,9 +61,7 @@ export function NavMobile() {
               </Link>
             </li>
           </ul>
-          {userEmail && tokenStatus && showNav && (
-            <CloseSesion email={userEmail} />
-          )}
+          {userEmail && showNav && <CloseSesion email={userEmail} />}
         </nav>
       )}
     </>

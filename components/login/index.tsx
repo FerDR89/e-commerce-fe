@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useRouter } from "next/router";
 import { useForm } from "react-hook-form";
 import styled from "styled-components";
+import swal from "sweetalert";
 import { sendCode, getToken } from "lib/API";
 import { ButtonOrange } from "ui/button";
 import { TextField } from "ui/textfield";
@@ -42,7 +43,7 @@ export function Login() {
     if (userEmail && code) {
       const result = await getToken(userEmail, code);
       if (result === false) {
-        alert("Unauthorized token");
+        swal("Unauthorized token");
       } else {
         router.push("/");
       }

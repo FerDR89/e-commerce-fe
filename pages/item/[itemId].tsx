@@ -1,3 +1,15 @@
 import { useRouter } from "next/router";
+import type { NextPage } from "next";
 
-export function Item() {}
+const Item: NextPage = () => {
+  const router = useRouter();
+  const { itemId } = router.query;
+
+  return (
+    <>
+      <p style={{ color: "white" }}>{JSON.stringify(itemId)}</p>
+    </>
+  );
+};
+
+export default Item;

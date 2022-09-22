@@ -1,5 +1,5 @@
-// const API_BASE_URL = "https://e-commerce-be.vercel.app/api";
-const API_BASE_URL = "http://localhost:3000/api";
+const API_BASE_URL = "https://e-commerce-be.vercel.app/api";
+// const API_BASE_URL = "http://localhost:3000/api";
 
 export default async function fetchAPI(
   input: RequestInfo,
@@ -60,6 +60,7 @@ const updateMe = async (data: UserUpdateProps) => {
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(data),
   });
+
   if (res.updated === true) {
     return true;
   } else {

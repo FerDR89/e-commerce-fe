@@ -1,5 +1,12 @@
+import type { NextPage } from "next";
 import { SearchPage } from "components/search-page";
 
-export default function Search() {
-  return <SearchPage />;
-}
+const Search: NextPage = () => {
+  return (
+    <>
+      <SearchPage />
+    </>
+  );
+};
+
+export default Search;
