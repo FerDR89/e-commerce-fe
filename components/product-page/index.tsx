@@ -31,7 +31,7 @@ const ProductPage = ({ productId }: ProductPageProp) => {
     }
     const url = await createOrder(productId);
     if (!url) {
-      swal("erro");
+      swal("error");
     }
     window.open(url, "_blank");
     // console.log(url);
