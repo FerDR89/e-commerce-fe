@@ -18,10 +18,8 @@ export function ProfilePage() {
   }, []);
 
   return showProfile ? (
-    <LayOutWithOutSearchMobile>
-      <section className={style.container}>
-        <Profile />
-      </section>
-    </LayOutWithOutSearchMobile>
+    <section className={style.container}>
+      <Profile />
+    </section>
   ) : null;
 }

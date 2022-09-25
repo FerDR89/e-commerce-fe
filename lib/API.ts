@@ -1,5 +1,5 @@
-const API_BASE_URL = "https://e-commerce-be.vercel.app/api";
-// const API_BASE_URL = "http://localhost:3000/api";
+// const API_BASE_URL = "https://e-commerce-be.vercel.app/api";
+const API_BASE_URL = "http://localhost:3000/api";
 
 export default async function fetchAPI(
   input: RequestInfo,
@@ -68,4 +68,44 @@ const updateMe = async (data: UserUpdateProps) => {
   }
 };
 
-export { sendCode, getToken, updateMe };
+const createOrder = async (productId: string) => {
+  const res = await fetchAPI(`/order?productId=${productId}`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    //Data mínima que me pide el endpoint para poder crear una orden.
+
+    body: JSON.stringify({
+      product_configuration: {
+        color: "violeta",
+        quantity: 10,
+      },
+      payer: {
+        phone: { mobile: 987654321 },
+        identification: { name: "enrique", lastname: "perez" },
+        address: {
+          street: "calle falsa",
+          number: 1234,
+          between_street: "calle verdadera y calle falsa 2",
+          city: "una localidad",
+          province: "una provincia",
+        },
+      },
+      shipments: {
+        receiver_address: {
+          street: "calle falsa",
+          number: 1234,
+          between_street: "calle verdadera y calle falsa 2 ",
+          city: "una localidad",
+          province: "una provincia",
+        },
+      },
+    }),
+  });
+
+  if (!res.url) {
+    return false;
+  }
+  return res.url;
+};
+
+export { sendCode, getToken, updateMe, createOrder };

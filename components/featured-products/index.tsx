@@ -7,7 +7,7 @@ import styled from "styled-components";
 import { useWindowSize } from "lib/hooks";
 
 interface ProductsArr {
-  img: { url: string }[];
+  img: [{ thumbnails: { large: { url: string } } }];
   productId: string;
   productCost: string;
   productName: string;
@@ -21,6 +21,9 @@ export function FeaturedProducts() {
   const { data, error } = useSWR(["/products", { method: "GET" }], fetchAPI);
   const { width } = useWindowSize();
   const featuredProductsArr = data ? data.slice(0, 3) : [];
+
+  console.log({ featuredProductsArr });
+
   return (
     <section className={style.container}>
       <div className={style.text__container}>
@@ -35,7 +38,7 @@ export function FeaturedProducts() {
             return (
               <Card
                 key={p.productId}
-                img={p.img[0].url}
+                img={p.img[0].thumbnails.large.url}
                 price={"$ " + p.productCost}
                 title={p.productName}
                 productId={p.productId}

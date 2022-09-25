@@ -15,6 +15,8 @@ export const ButtonBlue = styled(Button)`
 `;
 export const ButtonLightBlue = styled(Button)`
   background-color: var(--ligth-blue);
+  width: 328px;
+  height: 63px;
 `;
 
 export const ButtonOrange = styled(Button)`
