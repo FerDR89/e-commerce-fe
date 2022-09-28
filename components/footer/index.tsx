@@ -38,7 +38,12 @@ export function Footer() {
               </a>
             </Link>
           </li>
-          <li className={styles.li}>
+          <li
+            className={styles.li}
+            onClick={() => {
+              localStorage.clear();
+            }}
+          >
             <Link href={"/logout"}>
               <a className={styles.link}>
                 <BodyWht>Logout</BodyWht>

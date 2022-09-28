@@ -46,7 +46,7 @@ export function Header() {
         {userEmail ? (
           <CloseSesion email={userEmail} />
         ) : (
-          <ButtonFuchsia onClick={() => router.push("signin")}>
+          <ButtonFuchsia onClick={() => router.push("/signin")}>
             Ingresar
           </ButtonFuchsia>
         )}
@@ -89,7 +89,7 @@ export function HeaderWithOutSearchMobile() {
         {userEmail ? (
           <CloseSesion email={userEmail} />
         ) : (
-          <ButtonFuchsia onClick={() => router.push("signin")}>
+          <ButtonFuchsia onClick={() => router.push("/signin")}>
             Ingresar
           </ButtonFuchsia>
         )}
@@ -131,7 +131,7 @@ export function HeaderWithOutSearch() {
         {userEmail ? (
           <CloseSesion email={userEmail} />
         ) : (
-          <ButtonFuchsia onClick={() => router.push("signin")}>
+          <ButtonFuchsia onClick={() => router.push("/signin")}>
             Ingresar
           </ButtonFuchsia>
         )}

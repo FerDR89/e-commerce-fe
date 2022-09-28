@@ -1,6 +1,5 @@
 import { useRouter } from "next/router";
 import styled from "styled-components";
-import swal from "sweetalert";
 import { LargeT, Body } from "ui/texts";
 import styles from "./closeSesion.module.css";
 
@@ -25,9 +24,8 @@ export const CloseSesion = ({ email }: CloseSesionProps) => {
       <BodyWht>{email}</BodyWht>
       <LargeTFuchsia
         onClick={() => {
-          swal("Muchas gracias, vuelva prontos!");
           localStorage.clear();
-          router.push("/");
+          router.replace("/checkout");
         }}
       >
         Cerrar sesión

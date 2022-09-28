@@ -13,6 +13,7 @@
   align-items: center;
   justify-content: space-around;
   background-color: var(--Blk);
+  z-index: 1;
 }
 .container__ul {
   width: 100%;
