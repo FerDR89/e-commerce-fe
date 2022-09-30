@@ -1,15 +1,9 @@
 import { useRouter } from "next/router";
+import { ProductProps } from "lib/types";
 import { LargeT, Subtitle } from "ui/texts";
 import styles from "./card.module.css";
 
-type CardProps = {
-  img: string;
-  title: string;
-  price: string;
-  productId: string;
-};
-
-export function Card({ img, title, price, productId }: CardProps) {
+export function Card({ img, title, price, productId }: ProductProps) {
   const router = useRouter();
   const handleClick = () => {
     router.push(`/item/${productId}`);

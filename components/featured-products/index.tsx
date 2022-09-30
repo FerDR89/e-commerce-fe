@@ -1,17 +1,11 @@
-import style from "./featuredProducts.module.css";
-import { Card } from "components/card";
 import useSWR from "swr";
-import fetchAPI from "lib/API";
-import { Subtitle } from "ui/texts";
 import styled from "styled-components";
+import fetchAPI from "lib/API";
 import { useWindowSize } from "lib/hooks";
-
-interface ProductsArr {
-  img: [{ thumbnails: { large: { url: string } } }];
-  productId: string;
-  productCost: string;
-  productName: string;
-}
+import { FeaturedProducts } from "lib/types";
+import { Card } from "components/card";
+import { Subtitle } from "ui/texts";
+import style from "./featuredProducts.module.css";
 
 const SubtitleWht = styled(Subtitle)`
   color: var(--Wht);
@@ -21,8 +15,6 @@ export function FeaturedProducts() {
   const { data, error } = useSWR(["/products", { method: "GET" }], fetchAPI);
   const { width } = useWindowSize();
   const featuredProductsArr = data ? data.slice(0, 3) : [];
-
-  console.log({ featuredProductsArr });
 
   return (
     <section className={style.container}>
@@ -34,7 +26,7 @@ export function FeaturedProducts() {
         )}
       </div>
       {featuredProductsArr
-        ? featuredProductsArr.map((p: ProductsArr) => {
+        ? featuredProductsArr.map((p: FeaturedProducts) => {
             return (
               <Card
                 key={p.productId}

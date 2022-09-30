@@ -4,6 +4,8 @@ import style from "./search.module.css";
 import { ButtonOrange, ButtonBlue } from "ui/button";
 import { TextField } from "ui/textfield";
 import { useWindowSize } from "lib/hooks";
+import { useRouter } from "next/router";
+import swal from "sweetalert";
 
 const ButtonOrangeMobile = styled(ButtonOrange)`
   width: 328px;
@@ -25,15 +27,23 @@ interface FormInput {
 }
 
 export function SearchMobile() {
-  const { handleSubmit, control } = useForm({
+  const router = useRouter();
+  const { handleSubmit, control, reset } = useForm({
     defaultValues: {
       query: "",
     },
     mode: "onSubmit",
   });
 
-  //TODO LLAMADA A LA API Y REDIRECCIONAMIENTO
-  const onSubmit = (data: FormInput) => console.log(data);
+  const onSubmit = async (data: FormInput) => {
+    const q = data.query;
+    const cleanQuery: string = q.toLowerCase().trim();
+    router.push({
+      pathname: "/search",
+      query: { q: cleanQuery },
+    });
+    reset({ query: "" });
+  };
 
   return (
     <form className={style.form__mobile} onSubmit={handleSubmit(onSubmit)}>
@@ -53,13 +63,23 @@ export function SearchMobile() {
 }
 
 export function SearchDesktop() {
-  const { handleSubmit, control } = useForm({
+  const router = useRouter();
+  const { handleSubmit, control, reset } = useForm({
     defaultValues: {
       query: "",
     },
     mode: "onSubmit",
   });
-  const onSubmit = (data: FormInput) => console.log(data);
+
+  const onSubmit = async (data: FormInput) => {
+    const q = data.query;
+    const cleanQuery: string = q.toLowerCase().trim();
+    router.push({
+      pathname: "/search",
+      query: { q: cleanQuery },
+    });
+    reset({ query: "" });
+  };
 
   return (
     <form className={style.form__desk} onSubmit={handleSubmit(onSubmit)}>
@@ -79,18 +99,27 @@ export function SearchDesktop() {
 }
 
 export function SearchHome() {
+  const router = useRouter();
   const { width } = useWindowSize();
   const inputWidth = width < 376 ? 253 : 347;
   const inputHeight = width < 376 ? 39 : 43;
 
-  const { handleSubmit, control } = useForm({
+  const { handleSubmit, control, reset } = useForm({
     defaultValues: {
       query: "",
     },
     mode: "onSubmit",
   });
 
-  const onSubmit = (data: FormInput) => console.log({ data });
+  const onSubmit = async (data: FormInput) => {
+    const q = data.query;
+    const cleanQuery: string = q.toLowerCase().trim();
+    router.push({
+      pathname: "/search",
+      query: { q: cleanQuery },
+    });
+    reset({ query: "" });
+  };
 
   return (
     <form className={style.form__mobile} onSubmit={handleSubmit(onSubmit)}>

@@ -1,6 +1,4 @@
 import { useState, useEffect } from "react";
-import { useRecoilState, useRecoilValue } from "recoil";
-import { userState } from "./atoms";
 
 interface Size {
   width: number;
@@ -30,11 +28,3 @@ export function useWindowSize(): Size {
   }, []); // Empty array ensures that effect is only run on mount
   return windowSize;
 }
-
-// export function useSetUser() {
-//   return useRecoilState(userState);
-// }
-
-// export function useUser() {
-//   return useRecoilValue(userState);
-// }

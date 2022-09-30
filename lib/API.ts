@@ -1,5 +1,6 @@
-const API_BASE_URL = "https://e-commerce-be.vercel.app/api";
-// const API_BASE_URL = "http://localhost:3000/api";
+// const API_BASE_URL = "https://e-commerce-be.vercel.app/api";
+const API_BASE_URL = "http://localhost:3000/api";
+import { ProductsResponse, UserUpdateProps } from "lib/types";
 
 export default async function fetchAPI(
   input: RequestInfo,
@@ -46,14 +47,6 @@ const getToken = async (email: string, code: number) => {
   }
 };
 
-export type UserUpdateProps = {
-  fullname?: string;
-  phoneNumber?: string;
-  address?: string;
-  province?: string;
-  city?: string;
-};
-
 const updateMe = async (data: UserUpdateProps) => {
   const res = await fetchAPI("/me", {
     method: "PATCH",
@@ -72,8 +65,8 @@ const createOrder = async (productId: string) => {
   const res = await fetchAPI(`/order?productId=${productId}`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    //Data mínima que me pide el endpoint para poder crear una orden.
 
+    //Data mínima que me pide el endpoint para poder crear una orden.
     body: JSON.stringify({
       product_configuration: {
         color: "violeta",
@@ -108,4 +101,34 @@ const createOrder = async (productId: string) => {
   return res.url;
 };
 
-export { sendCode, getToken, updateMe, createOrder };
+const getProductsByQuery = async (
+  query: string,
+  limit: number,
+  offset: number
+) => {
+  console.log("estoy en api", query, limit, offset);
+
+  const res = await fetchAPI(`/search?q=traverse&limit=3&offset=0`, {
+    method: "GET",
+    headers: { "Content-Type": "application/json" },
+  });
+
+  if (!res) {
+    return false;
+  }
+
+  console.log({ results: res.results });
+
+  const formattedResults = res.results.map((i: ProductsResponse) => {
+    return {
+      img: i.Images,
+      productId: i.objectID,
+      price: i.UnitCost,
+      title: i.Name,
+    };
+  });
+
+  return { formattedResults, pagination: res.pagination };
+};
+
+export { sendCode, getToken, updateMe, createOrder, getProductsByQuery };
