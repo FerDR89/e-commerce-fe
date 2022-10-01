@@ -1,5 +1,5 @@
-// const API_BASE_URL = "https://e-commerce-be.vercel.app/api";
-const API_BASE_URL = "http://localhost:3000/api";
+const API_BASE_URL = "https://e-commerce-be.vercel.app/api";
+// const API_BASE_URL = "http://localhost:3000/api";
 import { ProductsResponse, UserUpdateProps } from "lib/types";
 
 export default async function fetchAPI(
@@ -101,24 +101,11 @@ const createOrder = async (productId: string) => {
   return res.url;
 };
 
-const getProductsByQuery = async (
-  query: string,
-  limit: number,
-  offset: number
-) => {
-  console.log("estoy en api", query, limit, offset);
-
-  const res = await fetchAPI(`/search?q=traverse&limit=3&offset=0`, {
+const getProductsByQuery = async (query: string, offset: number) => {
+  const res = await fetchAPI(`/search?q=${query}&limit=3&offset=${offset}`, {
     method: "GET",
     headers: { "Content-Type": "application/json" },
   });
-
-  if (!res) {
-    return false;
-  }
-
-  console.log({ results: res.results });
-
   const formattedResults = res.results.map((i: ProductsResponse) => {
     return {
       img: i.Images,

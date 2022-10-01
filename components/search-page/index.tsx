@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import styled from "styled-components";
-import { ProductProps } from "lib/types";
+import { ProductArrProps } from "lib/types";
 import { getProductsByQuery } from "lib/API";
 import { MainLayout } from "components/layout";
 import { Card } from "components/card";
@@ -20,64 +20,76 @@ const LargeLink = styled(LargeT)`
 export function SearchPage() {
   const router = useRouter();
   const { q } = router.query as any;
-  const [pagination, setPagination] = useState({ limit: 3, offset: 0 });
-  const [products, setProducts] = useState<ProductProps[]>([]);
+  const [offset, setOffset] = useState(0);
+  const [products, setProducts] = useState<ProductArrProps[]>([]);
   const [hints, setHints] = useState(0);
 
   const handlePagination = () => {
-    setPagination((prevState) => {
-      return {
-        limit: prevState.limit + 3,
-        offset: prevState.offset + 3,
-      };
-    });
+    if (products.length < hints) {
+      setOffset((prevState) => prevState + 3);
+    } else {
+      swal("No encontramos más productos en nuestro catalógo");
+    }
   };
 
   const getProducts = async (query: string) => {
     try {
-      const result = await getProductsByQuery(
-        query,
-        pagination.limit,
-        pagination.offset
-      );
-      // setProducts(result.formattedResults);
-      // setHints(result.pagination.total);
+      const result = await getProductsByQuery(query, offset);
+      const arrProducts = result.formattedResults;
+      if (products.length > 0) {
+        console.log("if");
+        setProducts((prevState) => {
+          return prevState.concat(arrProducts);
+        });
+      } else {
+        console.log("else");
+        setProducts(arrProducts);
+        setHints(result.pagination.total);
+      }
     } catch (error) {
       swal("Lo sentimos, hubo un error al querer buscar el producto");
       console.log(error);
     }
   };
 
+  // useEffect(() => {
+  //   if (q) {
+  //     getProducts(q);
+  //   }
+  // }, [q, offset]);
+
   useEffect(() => {
     if (q) {
-      console.log({ q });
-
+      setProducts([]);
+      setHints(0);
       getProducts(q);
     }
-  }, [q, pagination]);
+  }, [q]);
 
-  console.log({ products });
+  useEffect(() => {
+    getProducts(q);
+  }, [offset]);
 
   return (
     <MainLayout>
-      <section>
+      <>
         <Body style={{ color: "white" }}>
-          {pagination.limit} resultados de {hints}
+          {products.length} resultados de {hints}
         </Body>
-        {/* {products &&
+        {products &&
           products.map((p) => {
-            console.log(p);
-
-            <Card
-              key={1}
-              img={""}
-              price={"lalala"}
-              title={"lalalal"}
-              productId={"lalala"}
-            />;
-          })} */}
+            return (
+              <Card
+                key={p.productId}
+                img={p.img[0].thumbnails.large.url}
+                price={"$ " + p.price}
+                title={p.title}
+                productId={p.productId}
+              />
+            );
+          })}
         <LargeLink onClick={handlePagination}>ver más &gt;</LargeLink>
-      </section>
+      </>
     </MainLayout>
   );
 }

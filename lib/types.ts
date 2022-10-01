@@ -11,6 +11,12 @@ export interface ProductProps {
   price: string;
   productId: string;
 }
+export interface ProductArrProps {
+  img: [{ thumbnails: { large: { url: string } } }];
+  title: string;
+  price: string;
+  productId: string;
+}
 
 export interface ProductsResponse {
   Images: [{ thumbnails: { large: { url: string } } }];
