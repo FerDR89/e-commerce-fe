@@ -1,7 +1,8 @@
 import { useForm } from "react-hook-form";
 import styled from "styled-components";
 import swal from "sweetalert";
-import { updateMe, UserUpdateProps } from "lib/API";
+import { updateMe } from "lib/API";
+import { UserUpdateProps } from "lib/types";
 import { useWindowSize } from "lib/hooks";
 import { ButtonOrange } from "ui/button";
 import { TextField } from "ui/textfield";

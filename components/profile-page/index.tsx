@@ -5,11 +5,11 @@ import { useEffect, useState } from "react";
 import style from "./profilePage.module.css";
 
 export function ProfilePage() {
-  const [showProfile, setShowProfile] = useState(false);
   const router = useRouter();
+  const token = localStorage.getItem("auth_token");
+  const [showProfile, setShowProfile] = useState(false);
 
   useEffect(() => {
-    const token = localStorage.getItem("auth_token");
     if (token) {
       setShowProfile(true);
     } else {

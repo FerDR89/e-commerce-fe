@@ -25,7 +25,7 @@ export const CloseSesion = ({ email }: CloseSesionProps) => {
       <LargeTFuchsia
         onClick={() => {
           localStorage.clear();
-          router.replace("/checkout");
+          router.replace("/logout");
         }}
       >
         Cerrar sesión
