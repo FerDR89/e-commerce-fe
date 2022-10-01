@@ -17,7 +17,7 @@ export function ProfilePage() {
       swal(
         "Por favor es necesario que tengas una cuenta de usario para poder actualizar tú perfil"
       );
-      router.replace("/signin");
+      router.push("/signin");
     }
   }, []);
 
