@@ -1,19 +1,23 @@
-import { LayOutWithOutSearchMobile } from "components/layout";
 import { Profile } from "components/profile";
+import { useUserToken } from "lib/hooks";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
+import swal from "sweetalert";
 import style from "./profilePage.module.css";
 
 export function ProfilePage() {
   const router = useRouter();
-  const token = localStorage.getItem("auth_token");
+  const token = useUserToken();
   const [showProfile, setShowProfile] = useState(false);
 
   useEffect(() => {
-    if (token) {
+    if (token.token) {
       setShowProfile(true);
     } else {
-      router.push("/");
+      swal(
+        "Por favor es necesario que tengas una cuenta de usario para poder actualizar tú perfil"
+      );
+      router.replace("/signin");
     }
   }, []);
 

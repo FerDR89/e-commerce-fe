@@ -18,61 +18,61 @@ const LargeLink = styled(LargeT)`
 `;
 
 export function SearchPage() {
-  const router = useRouter();
-  const { q } = router.query as any;
-  const [offset, setOffset] = useState(0);
-  const [products, setProducts] = useState<ProductArrProps[]>([]);
-  const [hints, setHints] = useState(0);
+  // const router = useRouter();
+  // const { q } = router.query as any;
+  // const [offset, setOffset] = useState(0);
+  // const [products, setProducts] = useState<ProductArrProps[]>([]);
+  // const [hints, setHints] = useState(0);
 
-  const handlePagination = () => {
-    if (products.length < hints) {
-      setOffset((prevState) => prevState + 3);
-    } else {
-      swal("No encontramos más productos en nuestro catalógo");
-    }
-  };
+  // const handlePagination = () => {
+  //   if (products.length < hints) {
+  //     setOffset((prevState) => prevState + 3);
+  //   } else {
+  //     swal("No encontramos más productos en nuestro catalógo");
+  //   }
+  // };
 
-  const getProducts = async (query: string) => {
-    try {
-      const result = await getProductsByQuery(query, offset);
-      const arrProducts = result.formattedResults;
-      if (products.length > 0) {
-        console.log("if");
-        setProducts((prevState) => {
-          return prevState.concat(arrProducts);
-        });
-      } else {
-        console.log("else");
-        setProducts(arrProducts);
-        setHints(result.pagination.total);
-      }
-    } catch (error) {
-      swal("Lo sentimos, hubo un error al querer buscar el producto");
-      console.log(error);
-    }
-  };
+  // const getProducts = async (query: string) => {
+  //   try {
+  //     const result = await getProductsByQuery(query, offset);
+  //     const arrProducts = result.formattedResults;
+  //     if (products.length > 0) {
+  //       console.log("if");
+  //       setProducts((prevState) => {
+  //         return prevState.concat(arrProducts);
+  //       });
+  //     } else {
+  //       console.log("else");
+  //       setProducts(arrProducts);
+  //       setHints(result.pagination.total);
+  //     }
+  //   } catch (error) {
+  //     swal("Lo sentimos, hubo un error al querer buscar el producto");
+  //     console.log(error);
+  //   }
+  // };
+
+  // // useEffect(() => {
+  // //   if (q) {
+  // //     getProducts(q);
+  // //   }
+  // // }, [q, offset]);
 
   // useEffect(() => {
   //   if (q) {
+  //     setProducts([]);
+  //     setHints(0);
   //     getProducts(q);
   //   }
-  // }, [q, offset]);
+  // }, [q]);
 
-  useEffect(() => {
-    if (q) {
-      setProducts([]);
-      setHints(0);
-      getProducts(q);
-    }
-  }, [q]);
-
-  useEffect(() => {
-    getProducts(q);
-  }, [offset]);
+  // useEffect(() => {
+  //   getProducts(q);
+  // }, [offset]);
 
   return (
     <MainLayout>
-      <>
+      {/* <>
         <Body style={{ color: "white" }}>
           {products.length} resultados de {hints}
         </Body>
@@ -89,7 +89,7 @@ export function SearchPage() {
             );
           })}
         <LargeLink onClick={handlePagination}>ver más &gt;</LargeLink>
-      </>
+      </> */}
     </MainLayout>
   );
 }

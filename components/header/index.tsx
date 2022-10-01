@@ -5,20 +5,13 @@ import { LogoIcon } from "ui/icons";
 import { SearchDesktop, SearchMobile } from "components/search";
 import { ButtonFuchsia } from "ui/button";
 import { CloseSesion } from "components/close-sesion";
-import { useWindowSize } from "lib/hooks";
-import { useEffect, useState } from "react";
+import { useUserEmail, useUserToken, useWindowSize } from "lib/hooks";
 
 export function Header() {
   const router = useRouter();
   const { width } = useWindowSize();
-  const [userEmail, setUserEmail] = useState("");
-
-  useEffect(() => {
-    const email = localStorage.getItem("user_email");
-    if (email) {
-      setUserEmail(email);
-    }
-  }, []);
+  const token = useUserToken();
+  const email = useUserEmail();
 
   const returnClickIcon = () => {
     router.push("/");
@@ -43,8 +36,8 @@ export function Header() {
           <LogoIcon />
         </div>
         <SearchDesktop />
-        {userEmail ? (
-          <CloseSesion email={userEmail} />
+        {token.token ? (
+          <CloseSesion email={email.email} />
         ) : (
           <ButtonFuchsia onClick={() => router.push("/signin")}>
             Ingresar
@@ -58,14 +51,8 @@ export function Header() {
 export function HeaderWithOutSearchMobile() {
   const router = useRouter();
   const { width } = useWindowSize();
-  const [userEmail, setUserEmail] = useState("");
-
-  useEffect(() => {
-    const email = localStorage.getItem("user_email");
-    if (email) {
-      setUserEmail(email);
-    }
-  }, []);
+  const token = useUserToken();
+  const email = useUserEmail();
 
   const returnClickIcon = () => {
     router.push("/");
@@ -86,8 +73,8 @@ export function HeaderWithOutSearchMobile() {
           <LogoIcon />
         </div>
         <SearchDesktop />
-        {userEmail ? (
-          <CloseSesion email={userEmail} />
+        {token.token ? (
+          <CloseSesion email={email.email} />
         ) : (
           <ButtonFuchsia onClick={() => router.push("/signin")}>
             Ingresar
@@ -101,14 +88,8 @@ export function HeaderWithOutSearchMobile() {
 export function HeaderWithOutSearch() {
   const router = useRouter();
   const { width } = useWindowSize();
-  const [userEmail, setUserEmail] = useState("");
-
-  useEffect(() => {
-    const email = localStorage.getItem("user_email");
-    if (email) {
-      setUserEmail(email);
-    }
-  }, []);
+  const email = useUserEmail();
+  const token = useUserToken();
 
   const returnClickIcon = () => {
     router.push("/");
@@ -128,8 +109,8 @@ export function HeaderWithOutSearch() {
         <div style={{ cursor: "pointer" }} onClick={returnClickIcon}>
           <LogoIcon />
         </div>
-        {userEmail ? (
-          <CloseSesion email={userEmail} />
+        {token.token ? (
+          <CloseSesion email={email.email} />
         ) : (
           <ButtonFuchsia onClick={() => router.push("/signin")}>
             Ingresar

@@ -3,6 +3,7 @@ import styled from "styled-components";
 import styles from "./footer.module.css";
 import { Body } from "ui/texts";
 import { InstagramIcon, TwitterIcon } from "ui/icons";
+import { useSetUserEmail, useSetUserToken } from "lib/hooks";
 
 const BodyWht = styled(Body)`
   color: var(--Wht);
@@ -13,6 +14,8 @@ const BodyWht20 = styled(BodyWht)`
 `;
 
 export function Footer() {
+  const [userEmail, setUserEmail] = useSetUserEmail();
+  const [userToken, setUserToken] = useSetUserToken();
   return (
     <section className={styles.container}>
       <div className={styles.nav__container}>
@@ -46,7 +49,15 @@ export function Footer() {
           >
             <Link href={"/logout"}>
               <a className={styles.link}>
-                <BodyWht>Logout</BodyWht>
+                <BodyWht
+                  onClick={() => {
+                    localStorage.clear();
+                    setUserEmail({ email: "" });
+                    setUserToken({ token: "" });
+                  }}
+                >
+                  Logout
+                </BodyWht>
               </a>
             </Link>
           </li>

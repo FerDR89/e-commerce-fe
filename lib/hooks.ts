@@ -1,4 +1,6 @@
 import { useState, useEffect } from "react";
+import { useRecoilState, useRecoilValue } from "recoil";
+import { userEmailState, userTokenState } from "./atoms";
 
 interface Size {
   width: number;
@@ -27,4 +29,20 @@ export function useWindowSize(): Size {
     return () => window.removeEventListener("resize", handleResize);
   }, []); // Empty array ensures that effect is only run on mount
   return windowSize;
+}
+
+export function useSetUserEmail() {
+  return useRecoilState(userEmailState);
+}
+
+export function useUserEmail() {
+  return useRecoilValue(userEmailState);
+}
+
+export function useSetUserToken() {
+  return useRecoilState(userTokenState);
+}
+
+export function useUserToken() {
+  return useRecoilValue(userTokenState);
 }

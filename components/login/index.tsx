@@ -8,6 +8,7 @@ import { ButtonOrange } from "ui/button";
 import { TextField } from "ui/textfield";
 import { Subtitle, Body } from "ui/texts";
 import style from "./login.module.css";
+import { useSetUserEmail, useSetUserToken } from "lib/hooks";
 
 const ButtonOrangeLarge = styled(ButtonOrange)`
   width: 333px;
@@ -21,7 +22,9 @@ interface FormInput {
 
 export function Login() {
   const router = useRouter();
-  const [userEmail, setUserEmail] = useState("");
+  const [userEmail, setUserEmail] = useSetUserEmail();
+  const [userToken, setUserToken] = useSetUserToken();
+  const [showCode, setShowCode] = useState(false);
 
   const { handleSubmit, control, reset } = useForm({
     defaultValues: { email: "" },
@@ -33,24 +36,28 @@ export function Login() {
     if (email) {
       const cleanEmail: string = email.toLowerCase().trim();
       const result = await sendCode(cleanEmail);
-      result === true && setUserEmail(cleanEmail);
+      if (result === true) {
+        setUserEmail({ email: cleanEmail });
+        setShowCode(true);
+      }
       reset({ email: "" });
     }
   };
 
   const handleCode = async (data: FormInput) => {
     const code = data.code;
-    if (userEmail && code) {
-      const result = await getToken(userEmail, code);
+    if (userEmail.email && code) {
+      const result = await getToken(userEmail.email, code);
       if (result === false) {
         swal("Unauthorized token");
       } else {
-        router.push("/");
+        setUserToken({ token: result });
+        router.push("/profile");
       }
     }
   };
 
-  return !userEmail ? (
+  return !showCode ? (
     <>
       <div className={style.text__container}>
         <Subtitle>Ingresar</Subtitle>

@@ -1,4 +1,5 @@
 import { useRouter } from "next/router";
+import { useSetUserEmail, useSetUserToken } from "lib/hooks";
 import styled from "styled-components";
 import { LargeT, Body } from "ui/texts";
 import styles from "./closeSesion.module.css";
@@ -19,12 +20,16 @@ const BodyWht = styled(Body)`
 
 export const CloseSesion = ({ email }: CloseSesionProps) => {
   const router = useRouter();
+  const [userEmail, setUserEmail] = useSetUserEmail();
+  const [userToken, setUserToken] = useSetUserToken();
   return (
     <div className={styles.container__close}>
       <BodyWht>{email}</BodyWht>
       <LargeTFuchsia
         onClick={() => {
           localStorage.clear();
+          setUserEmail({ email: "" });
+          setUserToken({ token: "" });
           router.replace("/logout");
         }}
       >
