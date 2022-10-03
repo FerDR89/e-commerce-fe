@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useRecoilState, useRecoilValue } from "recoil";
-import { userEmailState, userTokenState, userPurchasedProduct } from "./atoms";
+import { userEmailState, userTokenState } from "./atoms";
 
 interface Size {
   width: number;
@@ -45,12 +45,4 @@ export function useSetUserToken() {
 
 export function useUserToken() {
   return useRecoilValue(userTokenState);
-}
-
-export function useSetPurchasedProduct() {
-  return useRecoilState(userPurchasedProduct);
-}
-
-export function usePurchasedProduct() {
-  return useRecoilValue(userPurchasedProduct);
 }
