@@ -3,7 +3,7 @@ import useSWR from "swr";
 import styled from "styled-components";
 import swal from "sweetalert";
 import fetchAPI, { createOrder } from "lib/API";
-import { useUserToken, useWindowSize } from "lib/hooks";
+import { useSetPurchasedProduct, useUserToken, useWindowSize } from "lib/hooks";
 import { Title, Subtitle, Body } from "ui/texts";
 import { ButtonLightBlue } from "ui/button";
 import style from "./productPage.module.css";
@@ -19,6 +19,7 @@ const ButtonLightBlueXL = styled(ButtonLightBlue)`
 const ProductPage = ({ productId }: ProductPageProp) => {
   const router = useRouter();
   const token = useUserToken();
+  const [purchasedProduct, setPurchasedProduct] = useSetPurchasedProduct();
   const { width } = useWindowSize();
 
   const { data, error } = useSWR(
@@ -33,6 +34,7 @@ const ProductPage = ({ productId }: ProductPageProp) => {
     } else {
       try {
         const url = await createOrder(productId);
+        setPurchasedProduct(data.Name);
         router.replace(`${url}`);
       } catch (error) {
         swal("error");

@@ -52,7 +52,7 @@ export function Login() {
         swal("Unauthorized token");
       } else {
         setUserToken({ token: result });
-        router.push("/profile");
+        router.push("/search");
       }
     }
   };

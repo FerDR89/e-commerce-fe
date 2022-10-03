@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useRouter } from "next/router";
 import styled from "styled-components";
 import swal from "sweetalert";
@@ -26,14 +26,6 @@ export function SearchPage() {
   const [hints, setHints] = useState(0);
   const [isLoading, setLoading] = useState(true);
 
-  const handlePagination = () => {
-    if (products.length < hints) {
-      setOffset((prevState) => prevState + 3);
-    } else {
-      swal("No encontramos más productos en nuestro catalógo");
-    }
-  };
-
   const getProducts = async (query: string) => {
     try {
       const result = await getProductsByQuery(query, offset);
@@ -46,7 +38,7 @@ export function SearchPage() {
       } else {
         setProducts(arrProducts);
         setHints(result.pagination.total);
-        setLoading(!isLoading);
+        setLoading(false);
       }
     } catch (error) {
       swal("Lo sentimos, hubo un error al querer buscar el producto");
@@ -54,7 +46,13 @@ export function SearchPage() {
     }
   };
 
-  console.log(isLoading, hints);
+  const handlePagination = () => {
+    if (products.length < hints) {
+      setOffset((prevState) => prevState + 3);
+    } else {
+      swal("No encontramos más productos en nuestro catalógo");
+    }
+  };
 
   useEffect(() => {
     if (q) {
@@ -71,6 +69,8 @@ export function SearchPage() {
     }
   }, [offset]);
 
+  console.log({ hints, isLoading });
+
   return (
     <MainLayout>
       <section
@@ -84,28 +84,33 @@ export function SearchPage() {
               ¿En qué podemos ayudarte?
             </Subtitle>
           )}
-
+        </div>
+        <div className={styles.results__container}>
           {hints > 0 && !isLoading && (
             <Body className={styles.text}>
               {products.length} resultados de {hints}
             </Body>
           )}
         </div>
-        {products &&
-          products.map((p) => {
-            return (
-              <Card
-                key={p.productId}
-                img={p.img[0].thumbnails.large.url}
-                price={"$ " + p.price}
-                title={p.title}
-                productId={p.productId}
-              />
-            );
-          })}
-        {hints > 0 && (
-          <LargeLink onClick={handlePagination}>ver más &gt;</LargeLink>
-        )}
+        <div className={styles.cards__container}>
+          {products &&
+            products.map((p) => {
+              return (
+                <Card
+                  key={p.productId}
+                  img={p.img[0].thumbnails.large.url}
+                  price={"$ " + p.price}
+                  title={p.title}
+                  productId={p.productId}
+                />
+              );
+            })}
+        </div>
+        <div>
+          {hints > 0 && (
+            <LargeLink onClick={handlePagination}>ver más &gt;</LargeLink>
+          )}
+        </div>
       </section>
     </MainLayout>
   );
