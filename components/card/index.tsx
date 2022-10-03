@@ -7,17 +7,9 @@ import swal from "sweetalert";
 
 export function Card({ img, title, price, productId }: ProductProps) {
   const router = useRouter();
-  const token = useUserToken();
 
   const handleClick = () => {
-    if (token.token) {
-      router.push(`/item/${productId}`);
-    } else {
-      swal(
-        "Por favor es necesario que tengas una cuenta de usario para poder ver el detalle del producto"
-      );
-      router.push(`/signin`);
-    }
+    router.push(`/item/${productId}`);
   };
 
   return (

@@ -1,16 +1,17 @@
 import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import styled from "styled-components";
+import swal from "sweetalert";
 import { ProductArrProps } from "lib/types";
 import { getProductsByQuery } from "lib/API";
 import { MainLayout } from "components/layout";
 import { Card } from "components/card";
-import { Body, LargeT } from "ui/texts";
-import swal from "sweetalert";
+import { Body, LargeT, Subtitle } from "ui/texts";
+import styles from "./searchPage.module.css";
 
 const LargeLink = styled(LargeT)`
   font-size: 24px;
-  color: var(--blue);
+  color: var(--ligth-blue);
   line-height: 24px;
   text-align: center;
   text-decoration-line: underline;
@@ -23,6 +24,7 @@ export function SearchPage() {
   const [offset, setOffset] = useState(0);
   const [products, setProducts] = useState<ProductArrProps[]>([]);
   const [hints, setHints] = useState(0);
+  const [isLoading, setLoading] = useState(true);
 
   const handlePagination = () => {
     if (products.length < hints) {
@@ -37,15 +39,14 @@ export function SearchPage() {
       const result = await getProductsByQuery(query, offset);
       const arrProducts = result.formattedResults;
       if (products.length > 0) {
-        console.log("if", { products, arrProducts });
         setProducts((prevState) => {
           return prevState.concat(arrProducts);
         });
         setHints(result.pagination.total);
       } else {
-        console.log("else", { products });
         setProducts(arrProducts);
         setHints(result.pagination.total);
+        setLoading(!isLoading);
       }
     } catch (error) {
       swal("Lo sentimos, hubo un error al querer buscar el producto");
@@ -53,7 +54,7 @@ export function SearchPage() {
     }
   };
 
-  console.log("Fuera", { products, offset });
+  console.log(isLoading, hints);
 
   useEffect(() => {
     if (q) {
@@ -65,15 +66,31 @@ export function SearchPage() {
   }, [q]);
 
   useEffect(() => {
-    getProducts(q);
+    if (q) {
+      getProducts(q);
+    }
   }, [offset]);
 
   return (
     <MainLayout>
-      <>
-        <Body style={{ color: "white" }}>
-          {products.length} resultados de {hints}
-        </Body>
+      <section
+        className={
+          isLoading ? `${styles.container__loading}` : `${styles.container}`
+        }
+      >
+        <div className={styles.text__container}>
+          {!q && hints == 0 && isLoading && (
+            <Subtitle className={styles.subtitle}>
+              ¿En qué podemos ayudarte?
+            </Subtitle>
+          )}
+
+          {hints > 0 && !isLoading && (
+            <Body className={styles.text}>
+              {products.length} resultados de {hints}
+            </Body>
+          )}
+        </div>
         {products &&
           products.map((p) => {
             return (
@@ -86,8 +103,10 @@ export function SearchPage() {
               />
             );
           })}
-        <LargeLink onClick={handlePagination}>ver más &gt;</LargeLink>
-      </>
+        {hints > 0 && (
+          <LargeLink onClick={handlePagination}>ver más &gt;</LargeLink>
+        )}
+      </section>
     </MainLayout>
   );
 }

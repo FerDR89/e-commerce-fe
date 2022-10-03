@@ -6,18 +6,9 @@ import type { NextPage } from "next";
 const Home: NextPage = () => {
   return (
     <LayOutWithOutSearch>
-      <HomePage />;
+      <HomePage />
     </LayOutWithOutSearch>
   );
 };
 
 export default Home;
-
-// export async function getServerSideProps() {
-//   const res = await fetch("https://e-commerce-be.vercel.app/api/products");
-//   const data = await res.json();
-
-//   console.log(data);
-
-//   return { props: { data } };
-// }

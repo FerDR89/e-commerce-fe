@@ -1,12 +1,12 @@
 import { useRouter } from "next/router";
 import useSWR from "swr";
 import styled from "styled-components";
+import swal from "sweetalert";
 import fetchAPI, { createOrder } from "lib/API";
+import { useUserToken, useWindowSize } from "lib/hooks";
 import { Title, Subtitle, Body } from "ui/texts";
 import { ButtonLightBlue } from "ui/button";
 import style from "./productPage.module.css";
-import { useUserToken, useWindowSize } from "lib/hooks";
-import swal from "sweetalert";
 
 interface ProductPageProp {
   productId: string;
@@ -18,6 +18,7 @@ const ButtonLightBlueXL = styled(ButtonLightBlue)`
 
 const ProductPage = ({ productId }: ProductPageProp) => {
   const router = useRouter();
+  const token = useUserToken();
   const { width } = useWindowSize();
 
   const { data, error } = useSWR(
@@ -26,11 +27,17 @@ const ProductPage = ({ productId }: ProductPageProp) => {
   );
 
   const handleClick = async () => {
-    const url = await createOrder(productId);
-    if (!url) {
-      swal("error");
+    if (!token.token) {
+      swal("Para realizar una compra, necesitamos que por favor te registres");
+      router.replace("/signin");
+    } else {
+      try {
+        const url = await createOrder(productId);
+        router.replace(`${url}`);
+      } catch (error) {
+        swal("error");
+      }
     }
-    router.replace(`${url}`);
   };
 
   return (

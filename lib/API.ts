@@ -105,6 +105,7 @@ const getProductsByQuery = async (query: string, offset: number) => {
     method: "GET",
     headers: { "Content-Type": "application/json" },
   });
+
   const formattedResults = res.results.map((i: ProductsResponse) => {
     return {
       img: i.Images,
